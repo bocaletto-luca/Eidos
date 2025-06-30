@@ -1,0 +1,58 @@
+start: func_decl+
+
+func_decl: "func" NAME "(" [param_list] ")" "{" statement* "}"
+
+param_list: NAME ("," NAME)*
+
+?statement: var_decl
+          | print_stmt
+          | expr_stmt
+          | if_stmt
+          | while_stmt
+          | return_stmt
+
+var_decl: "let" NAME "=" expr ";"
+print_stmt: "print" "(" expr ")" ";"
+expr_stmt: expr ";"
+if_stmt : "if" "(" expr ")" "{" statement* "}"
+while_stmt: "while" "(" expr ")" "{" statement* "}"
+return_stmt: "return" expr ";"
+
+?expr: equality
+
+?equality: comparison
+         | equality "==" comparison   -> eq
+         | equality "!=" comparison   -> ne
+
+?comparison: term
+           | comparison ">" term      -> gt
+           | comparison "<" term      -> lt
+           | comparison ">=" term     -> ge
+           | comparison "<=" term     -> le
+
+?term: term "+" factor                -> add
+     | term "-" factor                -> sub
+     | factor
+
+?factor: factor "*" atom              -> mul
+       | factor "/" atom              -> div
+       | atom
+
+?atom: NUMBER                         -> number
+     | STRING                         -> string
+     | NAME "(" [arg_list] ")"        -> call
+     | NAME                           -> var
+     | "(" expr ")"
+
+arg_list: expr ("," expr)*
+
+%import common.CNAME       -> NAME
+%import common.INT         -> NUMBER
+%import common.ESCAPED_STRING -> STRING
+%import common.WS
+%import common.C_COMMENT
+%import common.CPP_COMMENT
+
+%ignore WS
+%ignore C_COMMENT
+%ignore CPP_COMMENT
