@@ -1,0 +1,24 @@
+func add(x, y) {
+    return x + y;
+}
+
+func main() {
+    let a = 10;
+    let b = 20;
+    let sum = add(a, b);
+    print("a=");
+    print(a);
+    print("b=");
+    print(b);
+    print("sum=");
+    print(sum);
+    // controllo di flow:
+    if (sum > 25) {
+        print("sum è grande");
+    }
+    while (a < b) {
+        print(a);
+        let a = a + 2;
+    }
+    print("Done!");
+}
