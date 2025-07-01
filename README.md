@@ -1,5 +1,10 @@
 # Eidos
-Eidos programmer language open source by bocaletto luca
+Eidos programmer language open source 
+
+#### AUTHOR
+bocaletto luca
+
+#### Scheme
 
     Eidos/
     ├─ .venv/               ← virtualenv
@@ -14,8 +19,5 @@ Eidos programmer language open source by bocaletto luca
     ├─ tests/               ← 
     ├─ README.md
     └─ LICENSE
-
-#### Author
-    Bocaletto Luca
 
 ---
